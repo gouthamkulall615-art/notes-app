@@ -13,6 +13,10 @@ const SignUp = () => {
     password: "",
   });
 
+  const validateEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -22,6 +26,28 @@ const SignUp = () => {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
+
+    if (!formData.name.trim()) {
+      setError("Please enter your name");
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setError("Please enter a valid email");
+      return;
+    }
+
+    if (!formData.password.trim()) {
+      setError("Please enter password");
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+
+    setError("");
 
     try {
       console.log(formData);
@@ -39,31 +65,27 @@ const SignUp = () => {
 
       <div className="flex items-center justify-center px-4 py-10">
         <div className="w-full max-w-md rounded-2xl shadow-lg min-h-[550px] p-5">
-          <form onSubmit={handleSignUp}>
+          <form onSubmit={handleSignUp} noValidate>
             <div className="text-2xl mt-5 text-indigo-500 font-semibold text-center">
               Sign Up
             </div>
 
             <div className="flex flex-col justify-center items-center gap-6 mt-10">
-
               <input
                 type="text"
                 name="name"
                 placeholder="Full Name"
                 value={formData.name}
                 onChange={handleChange}
-                required
                 className="w-full max-w-[320px] px-4 py-4 border rounded-lg outline-none border-gray-400 focus:border-indigo-500"
               />
 
               <input
-                type="email"
+                type="text"
                 name="email"
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
-                autoComplete="email"
-                required
                 className="w-full max-w-[320px] px-4 py-4 border rounded-lg outline-none border-gray-400 focus:border-indigo-500"
               />
 
@@ -74,8 +96,6 @@ const SignUp = () => {
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
-                  autoComplete="new-password"
-                  required
                   className="w-full px-4 py-4 border rounded-lg outline-none border-gray-400 pr-12 focus:border-indigo-500"
                 />
 
