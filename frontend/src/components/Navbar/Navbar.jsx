@@ -16,7 +16,7 @@ const Navbar = () => {
     setSearchQuery("");
   };
   return (
-    <nav className="h-12 sm:h-14 w-full p-3">
+    <nav className="min-h-14 w-full p-3">
       <div className="flex justify-between items-center">
         <div className="text-2xl cursor-pointer">Notes App</div>
         <SearchBar value={searchQuery}
