@@ -60,7 +60,7 @@ const Home = () => {
         }}
         className="w-[90%] max-w-2xl max-h-[90vh] overflow-auto bg-white rounded-3xl mx-auto mt-14 p-6 shadow-2xl outline-none"
       >
-        <AddEditNotes />
+        <AddEditNotes onClose={()=>setOpenAddEditModal(false)} />
       </Modal>
     </div>
   );
